@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="SmokeStackDisassembler.fs" />
     <Compile Include="VMProcessor.fs" />
   </ItemGroup>
 
