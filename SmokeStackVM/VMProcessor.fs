@@ -25,10 +25,10 @@ module VMProcessor =
 open VMProcessor
 module VMProcessorSpec =
     type Register =
-        | PC = 0
-        | SP = 1
-        | R1 = 2
-        | R2 = 3
+        | R1 = 0
+        | R2 = 1
+        | SP = 2
+        | PC = 3
 
     let PushInstruction : InstructionSpec = { Opcode = 0uy; Mnemonic = "push"; OperandType = ImmediateOp; InstructionClass = StackOp; }
     let PopInstruction : InstructionSpec = { Opcode = 1uy; Mnemonic = "pop"; OperandType = NoneOp; InstructionClass = StackOp }
