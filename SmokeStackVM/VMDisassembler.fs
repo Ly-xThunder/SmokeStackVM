@@ -23,6 +23,7 @@ module VMDisassembler =
         Address: uint32
         Blob: byte []
     }
+    
     let Disassemble (blob:byte [], instructionAddress:uint32) =
         let PC = 0
         let DecodedInstruction = VMInstructionSet.[int blob.[PC]]
@@ -43,7 +44,7 @@ module VMDisassembler =
         let rec DisassembleUsingTailCall (blob:byte [], pcTrackingInfo : PCTrackingInformation, disassembly: DisassembledInstruction list) =
             if pcTrackingInfo.CurrentPC <= pcTrackingInfo.EndAddress then
                 let DisasmInstruction = Disassemble (blob.[int pcTrackingInfo.CurrentPC .. ], pcTrackingInfo.CurrentPC)
-                let InstructionSize = if DisasmInstruction.Instruction.OperandType <> NoneOp then 2uy else 1uy
+                let InstructionSize = CalculateInstructionSize DisasmInstruction.Instruction
                 let UpdatedPCTrackingInfo = { 
                     pcTrackingInfo with
                         CurrentPC = pcTrackingInfo.CurrentPC + (uint32 InstructionSize);

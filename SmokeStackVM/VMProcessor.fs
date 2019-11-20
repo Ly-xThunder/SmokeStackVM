@@ -22,16 +22,18 @@ module VMProcessor =
         InstructionClass: InstructionClass
     }
 
+    let CalculateInstructionSize instruction = if instruction.OperandType <> NoneOp then 2uy else 1uy
+
 open VMProcessor
 module VMProcessorSpec =
     type Register =
-        | R1 = 0
-        | R2 = 1
-        | SP = 2
-        | PC = 3
+        | r1 = 0
+        | r2 = 1
+        | sp = 2
+        | pc = 3
 
     let PushInstruction : InstructionSpec = { Opcode = 0uy; Mnemonic = "push"; OperandType = ImmediateOp; InstructionClass = StackOp; }
-    let PopInstruction : InstructionSpec = { Opcode = 1uy; Mnemonic = "pop"; OperandType = NoneOp; InstructionClass = StackOp }
+    let PopInstruction : InstructionSpec = { Opcode = 1uy; Mnemonic = "pop"; OperandType = ImmediateOp; InstructionClass = StackOp }
     let AddInstruction : InstructionSpec = { Opcode = 2uy; Mnemonic = "add"; OperandType = NoneOp; InstructionClass = ArithmeticOp; }
     let SubInstruction : InstructionSpec = { Opcode = 3uy; Mnemonic = "sub"; OperandType = NoneOp; InstructionClass = ArithmeticOp; }
     let RorInstruction : InstructionSpec = { Opcode = 4uy; Mnemonic = "ror"; OperandType = NoneOp; InstructionClass = BinaryOp; }
