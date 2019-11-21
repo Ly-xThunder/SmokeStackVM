@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Testing.fs" />
     <Compile Include="VMDisassemblerTestSuite.fs" />
     <Compile Include="VMDisassemblerTests.fs" />
     <Compile Include="Program.fs" />
