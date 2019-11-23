@@ -27,10 +27,10 @@ module VMDisassembler =
     let Disassemble (blob:byte [], instructionAddress:uint32) =
         let PC = 0
         let Opcode = blob.[PC]
-        if (int Opcode) > (VMInstructionSet.Length - 1) then Error (sprintf "Illegal instruction opcode: 0x%X" Opcode) else
+        if (int Opcode) > (VMInstructionSet.Length - 1) then Error (sprintf "Illegal instruction opcode: 0x%X at 0x%X" Opcode instructionAddress) else
         let DecodedInstruction = VMInstructionSet.[int Opcode]
         if (DecodedInstruction.OperandType = RegisterOp || DecodedInstruction.OperandType = ImmediateOp) && (blob.Length < 2) then
-            Error (sprintf "Illegal instruction length: %d" blob.Length)
+            Error (sprintf "Illegal instruction length: %d at 0x%X" blob.Length instructionAddress)
         else
             let (InstructionOperand:string, InstructionBlob:byte []) =
                 match DecodedInstruction.OperandType with
@@ -47,7 +47,6 @@ module VMDisassembler =
 
     let DisassembleLinearly (blob:byte []) =
         let rec DisassembleUsingTailCall (blob:byte [], pcTrackingInfo : PCTrackingInformation, disassembly: DisassembledInstruction list) =
-            if blob.Length = 0 then Error (sprintf "Invalid blob buffer length: %d" blob.Length) else
             if pcTrackingInfo.CurrentPC <= pcTrackingInfo.EndAddress then
                 let DisasmOutput = Disassemble (blob.[int pcTrackingInfo.CurrentPC .. ], pcTrackingInfo.CurrentPC)
                 match DisasmOutput with

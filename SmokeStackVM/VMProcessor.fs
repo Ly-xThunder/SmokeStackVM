@@ -33,7 +33,7 @@ module VMProcessorSpec =
         | pc = 3
 
     let PushInstruction : InstructionSpec = { Opcode = 0uy; Mnemonic = "push"; OperandType = ImmediateOp; InstructionClass = StackOp; }
-    let PopInstruction : InstructionSpec = { Opcode = 1uy; Mnemonic = "pop"; OperandType = ImmediateOp; InstructionClass = StackOp }
+    let PopInstruction : InstructionSpec = { Opcode = 1uy; Mnemonic = "pop"; OperandType = NoneOp; InstructionClass = StackOp }
     let AddInstruction : InstructionSpec = { Opcode = 2uy; Mnemonic = "add"; OperandType = NoneOp; InstructionClass = ArithmeticOp; }
     let SubInstruction : InstructionSpec = { Opcode = 3uy; Mnemonic = "sub"; OperandType = NoneOp; InstructionClass = ArithmeticOp; }
     let RorInstruction : InstructionSpec = { Opcode = 4uy; Mnemonic = "ror"; OperandType = NoneOp; InstructionClass = BinaryOp; }
