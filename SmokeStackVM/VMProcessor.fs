@@ -11,6 +11,7 @@ module VMProcessor =
         | ArithmeticOp
         | BinaryOp
         | ComparsionOp
+        | EqualityOp
         | BranchOp
         | DataMovementOp
         | UnknownOp
@@ -40,7 +41,7 @@ module VMProcessorSpec =
     let RolInstruction : InstructionSpec = { Opcode = 5uy; Mnemonic = "rol"; OperandType = NoneOp; InstructionClass = BinaryOp; }
     let XorInstruction : InstructionSpec = { Opcode = 6uy; Mnemonic = "xor"; OperandType = NoneOp; InstructionClass = BinaryOp; }
     let NotInstruction : InstructionSpec = { Opcode = 7uy; Mnemonic = "not"; OperandType = NoneOp; InstructionClass = BinaryOp; }
-    let EqInstruction : InstructionSpec = { Opcode = 8uy; Mnemonic = "eq"; OperandType = NoneOp; InstructionClass = ComparsionOp; }
+    let EqInstruction : InstructionSpec = { Opcode = 8uy; Mnemonic = "eq"; OperandType = NoneOp; InstructionClass = EqualityOp; }
     let IfInstruction : InstructionSpec = { Opcode = 9uy; Mnemonic = "if"; OperandType = NoneOp; InstructionClass = ComparsionOp; }
     let BrInstruction : InstructionSpec = { Opcode = 10uy; Mnemonic = "br"; OperandType = NoneOp; InstructionClass = BranchOp; }
     let StoreInstruction : InstructionSpec = { Opcode = 11uy; Mnemonic = "store"; OperandType = RegisterOp; InstructionClass = DataMovementOp; }
