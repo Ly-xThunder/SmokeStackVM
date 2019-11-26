@@ -7,9 +7,7 @@ module PCTracking =
 
     type PCTrackingInformation = {
         CurrentPC: uint32
-        PreviousPC: uint32
-        CurrentInstructionSize: byte
-        EndAddress: uint32
+        EndPC: uint32
         TrackingMode: TrackingMode
     }
 
@@ -47,7 +45,7 @@ module VMDisassembler =
 
     let DisassembleLinearly (blob:byte []) =
         let rec DisassembleUsingTailCall (blob:byte [], pcTrackingInfo : PCTrackingInformation, disassembly: DisassembledInstruction list) =
-            if pcTrackingInfo.CurrentPC <= pcTrackingInfo.EndAddress then
+            if pcTrackingInfo.CurrentPC <= pcTrackingInfo.EndPC then
                 let DisasmOutput = Disassemble (blob.[int pcTrackingInfo.CurrentPC .. ], pcTrackingInfo.CurrentPC)
                 match DisasmOutput with
                     | Ok disasmInstruction ->
@@ -55,8 +53,6 @@ module VMDisassembler =
                         let UpdatedPCTrackingInfo = { 
                             pcTrackingInfo with
                                 CurrentPC = pcTrackingInfo.CurrentPC + (uint32 InstructionSize);
-                                PreviousPC = pcTrackingInfo.CurrentPC;
-                                CurrentInstructionSize = InstructionSize;
                         }
                         DisassembleUsingTailCall (blob, UpdatedPCTrackingInfo , List.append disassembly [ disasmInstruction ])
                     | Error errorMessage -> Error errorMessage
@@ -65,9 +61,7 @@ module VMDisassembler =
 
         let PCTrackingInfo : PCTrackingInformation = {
             CurrentPC = 0u;
-            PreviousPC = 0u;
-            CurrentInstructionSize = 1uy;
-            EndAddress = uint32 blob.Length - 1u;
+            EndPC = uint32 blob.Length - 1u;
             TrackingMode = Linear;
         }
         DisassembleUsingTailCall (blob, PCTrackingInfo, List.Empty)
