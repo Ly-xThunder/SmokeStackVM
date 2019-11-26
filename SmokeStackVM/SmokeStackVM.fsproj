@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Include="VMProcessor.fs" />
     <Compile Include="VMDisassembler.fs" />
+    <Compile Include="CFGRecovery.fs" />
   </ItemGroup>
 
 </Project>
