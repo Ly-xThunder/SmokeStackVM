@@ -2,9 +2,9 @@
 
 module CFGRecovery =
     type CFGEdges<'TAddress> =
-        | Unary of TrueNode:'TAddress
-        | Binary of TrueNode:'TAddress * FalseNode:'TAddress
-        | None
+        | UnaryEdge of TrueNode:'TAddress
+        | BinaryEdge of TrueNode:'TAddress * FalseNode:'TAddress
+        | NoEdge
 
     type CFGNode<'TAddress, 'TExpressions> = {
         Address: 'TAddress;
