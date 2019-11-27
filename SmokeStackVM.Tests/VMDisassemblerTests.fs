@@ -1,12 +1,14 @@
-﻿module VMDisassemblerTests
-    open System
-    open Xunit
+﻿namespace SmokeStackVMTests
 
-    open SmokeStackVM.VMProcessor
-    open SmokeStackVM.VMProcessorSpec
-    open SmokeStackVM.VMDisassembler
-    
-    open VMDisassemblerTestSuite
+open Xunit
+
+open SmokeStackVM.VMProcessor
+open SmokeStackVM.VMProcessorSpec
+open SmokeStackVM.VMDisassembler
+
+open VMDisassemblerTestSuite
+
+module VMDisassemblerTests =
 
     [<Fact>]
     let ``Push Instruction is disassembled correctly`` () =
@@ -27,9 +29,7 @@
         let DisasmOutput = Disassemble (CorrectPopTestCase.Data, 0x00u)
         match DisasmOutput with
             | Ok disassembledPop ->
-                Assert.True(disassembledPop.Instruction.Opcode = PopInstruction.Opcode
-                && disassembledPop.Operand = CorrectPopTestCase.Data.[1].ToString()
-                )
+                Assert.True(disassembledPop.Instruction.Opcode = PopInstruction.Opcode)
             | Error errorMessage -> Assert.True(false)
     
     [<Fact>]
