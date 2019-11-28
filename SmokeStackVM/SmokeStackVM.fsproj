@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Signature.fs" />
     <Compile Include="PatternFinder.fs" />
     <Compile Include="VMProcessor.fs" />
     <Compile Include="VMDisassembler.fs" />
