@@ -158,8 +158,8 @@ module VMDisassemblerTests =
 
     [<Fact>]
     let ``Linear sweep disassembly algorithm is implemented correctly`` () =
-        let TestCaseData = Array.concat (Seq.ofArray (DisassembleLinearlyFunctionTestCase |> Array.choose (fun testCase -> Some (testCase.Data.Blob))))
-        let TestCaseDisassembly = List.ofArray (DisassembleLinearlyFunctionTestCase |> Array.choose (fun testCase -> Some (testCase.Data)))
+        let TestCaseData = DisassembleLinearlyFunctionTestCase |> Array.map (fun testCase -> testCase.Data.Blob) |> Array.concat
+        let TestCaseDisassembly = List.ofArray (DisassembleLinearlyFunctionTestCase |> Array.map (fun testCase -> testCase.Data))
         let ImplementationResult = DisassembleLinearly (TestCaseData)
         match ImplementationResult with
             | Ok linearDisassembly ->
